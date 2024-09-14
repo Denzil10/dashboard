@@ -1,5 +1,5 @@
 const visionBoard = document.getElementById('vision-board');
-const apiEndpoint = 'http://localhost:5000/photo'; // Adjust this URL to your local server's endpoint
+const apiEndpoint = '/photo'; // Adjust this URL to your local server's endpoint
 
 // Function to fetch photo URLs from the local server
 function fetchPhotosFromLocal() {

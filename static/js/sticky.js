@@ -55,7 +55,7 @@ const noteTemplate = `
     </div>`;
 
 let noteZindex = 1;
-const API_URL = 'http://localhost:5000/sticky-notes'; // Replace with your server URL
+const API_URL = '/sticky-notes'; // Replace with your server URL
 
 async function fetchStickyNotes() {
     try {
