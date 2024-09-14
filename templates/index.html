@@ -222,7 +222,7 @@
   <script>
     async function fetchStocks() {
       try {
-        const response = await fetch('http://localhost:5000/fetch_info/stocks');
+        const response = await fetch('/fetch_info/stocks');
         const result = await response.json();
         document.getElementById('stocks_info').textContent = `Nifty Index: ${result.nifty_index}`;
       } catch (error) {
@@ -233,7 +233,7 @@
 
     async function fetchHabitData() {
       try {
-        const response = await fetch('http://localhost:5000/fetch-habit-data');
+        const response = await fetch('/fetch-habit-data');
         const data = await response.json();
 
         handleInfoBlocks(data.info);
@@ -334,7 +334,7 @@
 
     async function completeHabit(habit) {
       try {
-        const response = await fetch(`http://localhost:5000/complete-habit/${habit}`, {
+        const response = await fetch(`/complete-habit/${habit}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
