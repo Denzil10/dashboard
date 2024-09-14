@@ -1,0 +1,190 @@
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #343a40;
+  margin: 0; /* Reset default margin for consistent layout */
+  padding: 0; /* Reset default padding */
+}
+
+h1 {
+  color: #343a40;
+}
+
+.card {
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for better definition */
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px; /* Add padding for better spacing */
+}
+
+.display-card, .habit-card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden; /* Ensure content stays within rounded corners */
+}
+
+.display-card {
+  height: 200px;
+  background-color: #e9ecef; /* Add a background color for distinction */
+}
+
+.habit-card {
+  height: 150px;
+  position: relative; /* Enable positioning of child elements */
+  overflow: hidden; 
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease;
+  z-index: 100;
+}
+
+.habit-card .card-body {
+  background: rgba(0, 0, 0, 0);
+  position: relative;
+}
+
+.streak-container {
+  display: flex;
+  position: absolute; 
+  bottom: 10px; 
+  right: 10px;
+  align-items: center;
+  justify-content: center;
+  z-index: 20; 
+
+}
+
+.streak-animation{
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  visibility: hidden;
+  background-size: cover;
+  z-index: -1;
+}
+
+.streak-number {
+  position: relative;
+  top: 14px;
+  width: 37px;
+  height: 37px;
+  border-color: #86d649;
+  border-width: 6px;
+  background-color:white;
+  border-radius: 50%;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  line-height: 40px;
+  text-align: center;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+.habit-card:hover .streak-animation {
+  visibility: visible;
+}
+
+.habit-card:hover {
+  /* background-color: #8b8e91; */
+  transform: translateY(-5px);
+}
+
+.habit-card:active {
+  transform: scale(0.95);
+}
+
+.habit-card.clicked {
+  animation: pulse 0.4s ease;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+#vision-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+  gap: 10px; 
+  position: relative;
+  padding: 10px; 
+  z-index: 1000;
+}
+
+.vision-photo {
+  width: 100%;
+  min-height: 6em;
+  max-height: 8em;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 8px; /* Optional: Add a slight border radius */
+  
+}
+
+.vision-photo:hover {
+  transform: scale(1.05);
+}
+
+#meditation-container {
+  position: relative;
+  display: inline-block;
+  z-index: 200;
+}
+
+#meditation-btn {
+  padding: 10px 20px;
+  position: relative;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4CAF50; 
+  color: white;
+  border: none;
+  border-radius: 500px;
+  z-index: 100;
+  transition: background-color 0.3s ease;
+}
+
+/* Change button color on hover */
+/* #meditation-btn:hover { 
+  background-color: #45a049; 
+} */
+
+/* Default state: hidden */
+#meditation-popup {
+  display: none;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px #0000001a;
+  z-index: 1;
+}
+
+/* Show popup on button hover */
+#meditation-container:hover ~ #meditation-popup {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #meditation-popup {
+    width: 90%; /* Adjust popup width for smaller screens */
+  }
+}

@@ -1,0 +1,8 @@
+flask
+flask-cors
+firebase-admin
+google-generativeai
+requests
+requests-oauthlib
+google-auth-oauthlib
+apscheduler

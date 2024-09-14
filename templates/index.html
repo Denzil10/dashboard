@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Habit Building Dashboard</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sticky.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
+  <style>
+    .embed-responsive {
+      margin-bottom: 20px;
+    }
+    .scrolling-section {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center my-4">Habit Building Dashboard</h1>
+
+    <!-- Top Section: Vision Board on Left, Meditate, Course on Right -->
+    
+    <div class="row" width="100%">
+      <div class="col-md-12">
+        <div class="container">
+
+          <div id="vision-board" class="position-relative" >
+            <!-- Vision Board Section -->
+            <!-- Meditation Section -->
+            <div id="meditation-container">
+              <button id="meditation-btn">Meditation</button>
+            </div>
+
+            <div id="meditation-popup">
+              <iframe src="https://meditationtimer.online/?d=420" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
+
+       </div>
+             
+      </div>      
+    </div>
+
+    <!-- Sticky notes -->
+    <a href="javascript:;" class="button" id="add_new">Add New Note</a>
+    <div id="board" height="400">
+      
+    </div>
+
+    <!-- Info Cards: Stocks, Budget, Fitness, Score -->
+    <div class="info-cards row mb-4">
+      <div class="col-md-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Stocks</h5>
+            <ul id="stocks_info" class="list-group list-group-flush alert alert-info mt-3"></ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Budget</h5>
+            <div id="budget_info" class="alert alert-info mt-3">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Fitness</h5>
+            <div id="fitness_info" class="alert alert-info mt-3">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card shadow">
+          <div class="card-body">
+            <h5 class="card-title">Score</h5>
+            <div id="score" class="alert alert-info mt-3">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Habit Cards: Two Rows -->
+    <div class="row">
+      <!-- First Row of Habit Cards -->
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="early">
+          <div class="card-body">
+            <h5 class="card-title">Early / Sleep</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="fap_junk_2hr">
+          <div class="card-body">
+            <h5 class="card-title">Fap / Junk / 2hr</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="leetcode">
+          <div class="card-body">
+            <h5 class="card-title">LeetCode</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="journal">
+          <div class="card-body">
+            <h5 class="card-title">Journal</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Second Row of Habit Cards -->
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="lyrics">
+          <div class="card-body">
+            <h5 class="card-title">Lyrics</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="social">
+          <div class="card-body">
+            <h5 class="card-title">Social</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="self_care">
+          <div class="card-body">
+            <h5 class="card-title">Self Care</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card habit-card shadow" data-habit="trivia">
+          <div class="card-body">
+            <h5 class="card-title">Trivia</h5>
+            <div class="habit-values"></div>
+            <div class="streak-container">
+              <div class="streak-animation"> </div>
+              <div class="streak-number"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learning Section: Centered -->
+    <div class="text-center mt-5">
+      <div class="col-md-8 embed-responsive embed-responsive-16by9">
+        <iframe width="900" height="1600" src="https://rss.app/embed/v1/imageboard/P2xNmmfpg44iTc7X" frameborder="0"></iframe>
+      </div>
+
+      <div class="col-md-4 embed-responsive embed-responsive-16by9">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/1VXcH8QHkjRcTCEd88U3ti?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+  <!-- Bootstrap -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js"></script>
+  <script>
+    async function fetchStocks() {
+      try {
+        const response = await fetch('http://localhost:5000/fetch_info/stocks');
+        const result = await response.json();
+        document.getElementById('stocks_info').textContent = `Nifty Index: ${result.nifty_index}`;
+      } catch (error) {
+        console.error('Error fetching stocks:', error);
+        document.getElementById('stocks_info').textContent = 'Failed to fetch stocks.';
+      }
+    }
+
+    async function fetchHabitData() {
+      try {
+        const response = await fetch('http://localhost:5000/fetch-habit-data');
+        const data = await response.json();
+
+        handleInfoBlocks(data.info);
+        const today = new Date().toISOString().split('T')[0];
+        handleHabitCards(data.habit, data.progress[today]);
+      } catch (error) {
+        console.error('Error fetching habit data:', error);
+      }
+    }
+
+    // Function to handle Info Blocks
+    function handleInfoBlocks(info) {
+      if (info.budget_app) {
+        document.getElementById('budget_info').textContent = `Daily Limit: ${info.budget_app.dailyLimit}`;
+        document.getElementById('budget_info').textContent += `\nSpent: ${info.budget_app.spent}`;
+      }
+      
+      if (info.fitness) {
+        document.getElementById('fitness_info').textContent = `Calories Burned: ${info.fitness.calories_burned}`;
+        document.getElementById('fitness_info').textContent += `\nSteps: ${info.fitness.steps}`;
+      }
+   }
+
+    // Function to handle Habit Cards
+    function handleHabitCards(habitData, progressData) {
+      document.querySelectorAll('.habit-card').forEach(card => {
+        const habit = card.getAttribute('data-habit');
+        const habitInfo = habitData[habit];
+        const today = new Date().toISOString().split('T')[0];
+        const isComplete = (progressData && progressData[habit]) ? true : false;
+
+        const streakContainer = card.querySelector('.streak-container'); 
+        const streakAnim = streakContainer.querySelector('.streak-animation'); 
+        const streakNumber = streakContainer.querySelector('.streak-number'); 
+        console.log("habit info", habitInfo);
+
+        streakNumber.innerHTML = `${habitInfo['streak']}`;
+        if(isComplete){
+          streakAnim.style.visibility = "visible";
+        }
+
+        // Handle additional values based on habit
+        if (habitInfo && habitInfo.values) {
+          const valuesDiv = card.querySelector('.habit-values');
+          valuesDiv.innerHTML = ''; 
+          const p = document.createElement('p');
+          const ind = habitInfo['currentIndex']; 
+          p.textContent = habitInfo.values[ind]; 
+          valuesDiv.appendChild(p);
+        }
+        else{
+          // console.log("no values")
+        }
+      });
+    }
+
+    // Initialize
+    fetchStocks();
+    fetchHabitData();
+
+    // Run animations
+    const habitCards = document.querySelectorAll('.habit-card');
+    habitCards.forEach(card => {
+      const streakAnimContainer = card.querySelector('.streak-animation');
+      const animation = lottie.loadAnimation({
+        container: streakAnimContainer, // the DOM element
+        renderer: 'svg',
+        loop: true,
+        autoplay: true, // Disable autoplay to control with hover
+        path: './static/images/fire.json' 
+      });
+      animation.play();
+      });
+ 
+    // Load the sound effect
+    const clickSound = new Audio('./static/images/bonus.mp3'); // Replace with your sound file URL
+
+    document.querySelectorAll('.habit-card').forEach(card => {
+      card.addEventListener('click', () => {
+        // Play sound effect
+        clickSound.play();
+        console.log("clicked sound")
+
+        // Add click animation class
+        card.classList.add('clicked');
+
+        // Remove the class after the animation completes
+        setTimeout(() => {
+          card.classList.remove('clicked');
+        }, 400);
+
+        // Trigger the completeHabit function with the habit name
+        const habitName = card.getAttribute('data-habit');
+        completeHabit(habitName);
+        fetchHabitData()
+      });
+    });
+
+    async function completeHabit(habit) {
+      try {
+        const response = await fetch(`http://localhost:5000/complete-habit/${habit}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+        });
+
+        const result = await response.json();
+
+      } catch (error) {
+        console.error('Error completing habit:', error);
+      }
+    }
+  </script>
+
+  <script src="{{ url_for('static', filename='js/sticky.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/vision.js') }}"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+</body>
+</html>
