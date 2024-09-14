@@ -9,14 +9,17 @@ from google_auth_oauthlib.flow import Flow
 from google.auth.transport.requests import Request
 from flask_cors import CORS
 
-# Initialize Firebase Admin SDK
-firebase_cred = credentials.Certificate('./secrets/firebase_cred.json')
+# Load Firebase Admin SDK credentials from environment variable
+firebase_cred_path = os.getenv('FIREBASE_CRED')
+firebase_cred = credentials.Certificate(firebase_cred_path)
 firebase_admin.initialize_app(firebase_cred, {
-    'databaseURL': 'https://upi-buddy-default-rtdb.firebaseio.com/'
+    'databaseURL': os.getenv('FIREBASE_DATABASE_URL', 'https://upi-buddy-default-rtdb.firebaseio.com/')
 })
 
-# Load OAuth client configuration
-oauth_cred= json.load(open('./secrets/oauth_cred.json'))
+# Load OAuth client configuration from environment variable
+oauth_cred_path = os.getenv('OAUTH_CRED')
+with open(oauth_cred_path) as f:
+    oauth_cred = json.load(f)
 
 SCOPES = [
     'https://www.googleapis.com/auth/fitness.activity.read', 
@@ -27,8 +30,8 @@ SCOPES = [
 
 # Initialize Flask application
 app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY', 'habit_secret_key') 
-CORS(app) 
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'habit_secret_key')
+CORS(app)
 
 # Save OAuth credentials to Firebase
 def save_credentials(credentials):
