@@ -10,23 +10,22 @@ from google.auth.transport.requests import Request
 from flask_cors import CORS
 
 # Load Firebase Admin SDK credentials from environment variable
-firebase_cred_path = os.getenv('FIREBASE_CRED')
-firebase_cred = credentials.Certificate(firebase_cred_path)
-firebase_admin.initialize_app(firebase_cred, {
-    'databaseURL': os.getenv('FIREBASE_DATABASE_URL', 'https://upi-buddy-default-rtdb.firebaseio.com/')
-})
+firebase_cred_json = os.getenv('FIREBASE_CRED')
+if firebase_cred_json:
+    firebase_cred_dict = json.loads(firebase_cred_json)
+    firebase_cred = credentials.Certificate(firebase_cred_dict)
+    firebase_admin.initialize_app(firebase_cred, {
+        'databaseURL': os.getenv('FIREBASE_DATABASE_URL', 'https://upi-buddy-default-rtdb.firebaseio.com/')
+    })
+else:
+    raise ValueError("FIREBASE_CRED environment variable is not set")
 
 # Load OAuth client configuration from environment variable
-oauth_cred_path = os.getenv('OAUTH_CRED')
-with open(oauth_cred_path) as f:
-    oauth_cred = json.load(f)
-
-SCOPES = [
-    'https://www.googleapis.com/auth/fitness.activity.read', 
-    'https://www.googleapis.com/auth/userinfo.email', 
-    'https://www.googleapis.com/auth/userinfo.profile', 
-    'openid'
-]
+oauth_cred_json = os.getenv('OAUTH_CRED')
+if oauth_cred_json:
+    oauth_cred = json.loads(oauth_cred_json)
+else:
+    raise ValueError("OAUTH_CRED environment variable is not set")
 
 # Initialize Flask application
 app = Flask(__name__)
