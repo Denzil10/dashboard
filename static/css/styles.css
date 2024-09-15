@@ -120,7 +120,7 @@ h1 {
   gap: 10px; 
   position: relative;
   padding: 10px; 
-  z-index: 1000;
+  z-index: 100;
 }
 
 .vision-photo {
@@ -152,7 +152,7 @@ h1 {
   color: white;
   border: none;
   border-radius: 500px;
-  z-index: 100;
+  z-index: 1000;
   transition: background-color 0.3s ease;
 }
 
